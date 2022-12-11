@@ -7,7 +7,7 @@ public class throttleExample {
     private static RateLimiter rateLimiter;
     public static void main(String[] args) {
 
-        // if you are allowing 500 requests per second
+        // if you are allowing 5 requests per second
         rateLimiter = RateLimiter.create(5);
 
         long start = System.currentTimeMillis();

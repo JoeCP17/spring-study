@@ -31,6 +31,7 @@ dependencies {
 	// throttling을 사용하기 위한 guava
 	implementation group: 'com.google.guava', name: 'guava', version: '19.0'
 
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
