@@ -17,6 +17,13 @@ public class Member {
 
     private String userName;
 
+    private int age;
+
+    public Member(String userName, int age) {
+        this.userName = userName;
+        this.age = age;
+    }
+
     // jpa에서 proxy를 할때 private으로 적용하면 사용할 수 없기에 protected로 설정
     protected Member() {
     }
@@ -24,5 +31,6 @@ public class Member {
     public Member(String userName) {
         this.userName = userName;
     }
+
 
 }
