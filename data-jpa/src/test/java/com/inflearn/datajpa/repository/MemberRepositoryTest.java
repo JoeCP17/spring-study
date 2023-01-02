@@ -1,6 +1,7 @@
 package com.inflearn.datajpa.repository;
 
 import com.inflearn.datajpa.dto.MemberDTO;
+import com.inflearn.datajpa.entity.Member;
 import com.inflearn.datajpa.entity.Member_v2;
 import com.inflearn.datajpa.entity.Team;
 import org.assertj.core.api.Assertions;
@@ -203,4 +204,80 @@ class MemberRepositoryTest {
         //then
         assertThat(resultCount).isEqualTo(3);
     }
+
+    @Test
+    public void findMemberLazy() {
+        //given
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member_v2 member1 = new Member_v2("member1", 10, teamA);
+        Member_v2 member2 = new Member_v2("member2", 10, teamB);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        //when N + 1
+        List<Member_v2> members = memberRepository.findEntityGraphByUserName("member1");
+
+        for (Member_v2 member : members) {
+            System.out.println("member = " + member.getUserName());
+            System.out.println("member.teamclass = " + member.getTeam().getClass());
+            System.out.println("member team = " + member.getTeam().getName());
+        }
+    }
+
+    @Test
+    public void queryHint() {
+
+        Member_v2 member1 = new Member_v2("member1", 10);
+        // given
+        memberRepository.save(member1);
+
+        // 영속성 컨텍스트 캐시 제거
+        entityManager.flush();
+        entityManager.clear();
+
+        //When
+        Member_v2 findMember = memberRepository.findReadOnlyByUserName("member1");
+        findMember.setUserName("member2");
+
+        // 더티 체킹 이후 변경을 감지하여 수정을한다.
+
+        /*
+            하지만 , 데이터 체킹 혹은 변경 데이터에 대한 탐색등
+         */
+        entityManager.flush();
+
+    }
+    @Test
+    public void lock() {
+
+        Member_v2 member1 = new Member_v2("member1", 10);
+        // given
+        memberRepository.save(member1);
+
+        // 영속성 컨텍스트 캐시 제거
+        entityManager.flush();
+        entityManager.clear();
+
+        //When
+        Member_v2 findMember = memberRepository.findLockByUserName("member1");
+        findMember.setUserName("member2");
+
+        // 더티 체킹 이후 변경을 감지하여 수정을한다.
+
+        /*
+            하지만 , 데이터 체킹 혹은 변경 데이터에 대한 탐색등
+         */
+        entityManager.flush();
+
+    }
+
 }

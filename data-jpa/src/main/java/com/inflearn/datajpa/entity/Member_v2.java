@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter @Setter // Setter는 가급적 사용하지 않는다.
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id","userName", "age"})
+@NamedEntityGraph(name = "Member_v2.all", attributeNodes = @NamedAttributeNode("team"))
 public class Member_v2 {
 
     @Id
