@@ -30,8 +30,8 @@ public class WeatherData implements Subject {
     @Override
     public void notifyObserver() {
         for (Observer observer : observers) {
-//            observer.update(temperature, humidity, pressure);
-            observer.pull_update();
+            observer.update(temperature, humidity, pressure);
+//            observer.pull_update();
         }
     }
 
