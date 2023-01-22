@@ -277,7 +277,11 @@ class MemberRepositoryTest {
             하지만 , 데이터 체킹 혹은 변경 데이터에 대한 탐색등
          */
         entityManager.flush();
+    }
 
+    @Test
+    public void callCustom() {
+        List<Member> result = memberRepository.findMemberCustom();
     }
 
 }

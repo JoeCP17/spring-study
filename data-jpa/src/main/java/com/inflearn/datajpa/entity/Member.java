@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter // Setter는 가급적 사용하지 않는다.
-public class Member {
+public class Member extends JpaBaseEntity{
 
     @Id
     @GeneratedValue

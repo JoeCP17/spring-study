@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id","userName", "age"})
 @NamedEntityGraph(name = "Member_v2.all", attributeNodes = @NamedAttributeNode("team"))
-public class Member_v2 {
+public class Member_v2 extends BaseEntity{
 
     @Id
     @GeneratedValue

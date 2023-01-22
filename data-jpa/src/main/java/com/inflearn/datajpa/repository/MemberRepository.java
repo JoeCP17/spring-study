@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member_v2, Long> {
+public interface MemberRepository extends JpaRepository<Member_v2, Long>, MemberRepositoryCustom{
 
     List<Member_v2> findByUserNameAndAgeGreaterThan(String username, int age);
 
@@ -71,6 +71,9 @@ public interface MemberRepository extends JpaRepository<Member_v2, Long> {
     // 해당 부분은 조회 전체가 아닌, 성능테스트 이후 정말 중요한 부분에 넣으면 이점이 된다면? -> 넣는다.
     // 사실, 그전에 캐싱처리등으로 가는게 맞지만 정말 마지막 최후의 보루로 생각하면 좋을듯..?
 
+
+    // 실시간 트래픽이 많은 서비스의 경우는 비관적 락 보다는 낙관적 락을 쓰는게 좋다
+    // 왜? 비관적 락의 경우 하나의 대상의 트랜젝션이 시도될때 다른 트랜젝션 접근자체가 될 수 없기때문에 데드락이 발생할 가능성이 있다.
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Member_v2 findLockByUserName(String username);
 }
