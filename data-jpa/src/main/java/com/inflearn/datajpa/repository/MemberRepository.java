@@ -1,6 +1,8 @@
 package com.inflearn.datajpa.repository;
 
 import com.inflearn.datajpa.dto.MemberDTO;
+import com.inflearn.datajpa.dto.UserNameOnlyDTO;
+import com.inflearn.datajpa.entity.Member;
 import com.inflearn.datajpa.entity.Member_v2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +16,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member_v2, Long>, MemberRepositoryCustom{
+public interface MemberRepository extends JpaRepository<Member_v2, Long>, MemberRepositoryCustom, JpaSpecificationExecutor<Member>{
 
     List<Member_v2> findByUserNameAndAgeGreaterThan(String username, int age);
+
+    List<Member_v2> findByUserName(@Param("userName") String userName);
+
+    // 해당 구현체에 proxy 객체가 담겨서 return된다.
+    <T> List<T> findProjectionsByUserName(@Param("userName") String userName, Class<T> type);
 
     @Query("select m from Member_v2 m where m.userName = :username and m.age = :age")
     List<Member_v2> findUser(@Param("username") String username, @Param("age") int age);
@@ -29,6 +36,8 @@ public interface MemberRepository extends JpaRepository<Member_v2, Long>, Member
 
     @Query("select m from Member_v2 m where m.userName in :names")
     List<Member_v2> findMember_v2ByUserName(@Param("names") Collection<String> names);
+    @Query("select m from Member_v2 m where m.userName in :name and m.age = :age")
+    List<Member_v2> findMember_v2ByUser(@Param("name") String name, @Param("age")int age);
 
 
     List<Member_v2> findListByUserName(String userName); // 컬렉션
@@ -76,4 +85,6 @@ public interface MemberRepository extends JpaRepository<Member_v2, Long>, Member
     // 왜? 비관적 락의 경우 하나의 대상의 트랜젝션이 시도될때 다른 트랜젝션 접근자체가 될 수 없기때문에 데드락이 발생할 가능성이 있다.
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Member_v2 findLockByUserName(String username);
+
+
 }

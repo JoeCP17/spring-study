@@ -1,6 +1,7 @@
 package com.inflearn.datajpa.repository;
 
 import com.inflearn.datajpa.entity.Member;
+import com.inflearn.datajpa.entity.Team;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
