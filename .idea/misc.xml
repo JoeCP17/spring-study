@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/disign" />
     <file type="web" url="file://$PROJECT_DIR$/disignPattern" />
+    <file type="web" url="file://$PROJECT_DIR$/querydsl" />
     <file type="web" url="file://$PROJECT_DIR$/thread" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK">
