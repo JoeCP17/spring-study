@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/disign" />
     <file type="web" url="file://$PROJECT_DIR$/disignPattern" />
+    <file type="web" url="file://$PROJECT_DIR$/lock" />
     <file type="web" url="file://$PROJECT_DIR$/querydsl" />
     <file type="web" url="file://$PROJECT_DIR$/thread" />
   </component>
