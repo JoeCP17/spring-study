@@ -23,7 +23,7 @@ class TicketServiceTest {
     @BeforeEach
     void settingTickets(){
         final String name = "IU-TICKET";
-        final String keyId = "001";
+        final String keyId = "RedShoes";
         final int amount = 100;
         final Ticket iu_ticket = new Ticket(name, keyId, amount);
 
