@@ -24,7 +24,7 @@ class TicketServiceTest {
     void settingTickets(){
         final String name = "IU-TICKET";
         final String keyId = "RedShoes";
-        final int amount = 100;
+        final int amount = 1000;
         final Ticket iu_ticket = new Ticket(name, keyId, amount);
 
         this.ticketKey = ticketService.keyResolver(iu_ticket.getName(), iu_ticket.getKeyId());
@@ -72,7 +72,7 @@ class TicketServiceTest {
 
     @Test
     void used_lock() throws InterruptedException {
-        final int people = 200;
+        final int people = 100000;
         final int count = 1;
         final int soldOut = 0;
         final CountDownLatch countDownLatch = new CountDownLatch(people);
@@ -87,6 +87,8 @@ class TicketServiceTest {
         final int currentCount = ticketService.currentTicket(this.ticketKey);
         assertEquals(soldOut, currentCount);
     }
+
+
 
     private class BuyWorker implements Runnable{
         private final String ticketKey;
@@ -105,6 +107,7 @@ class TicketServiceTest {
             countDownLatch.countDown();
         }
     }
+
 
     private class BuyNoLockWorker implements Runnable{
         private final String ticketKey;
