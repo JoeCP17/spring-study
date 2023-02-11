@@ -21,7 +21,6 @@ public class RemoteLoader {
         GarageDoor garageDoor = new GarageDoor("Garage");
         Streo stereo = new Streo("Living Room");
 
-        // TODO: 방법 1 - 구상 커맨드 객체 생성 후 setCommand 호출
         // Command
         LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
         LightOffCommand livingRoomLightOff = new LightOffCommand(livingRoomLight);
