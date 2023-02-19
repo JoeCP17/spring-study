@@ -221,7 +221,7 @@ public class QuerydslBasicTest {
     /*
         세타 조인
         회원의 이름이 팀 이름과 같은 회원 조회
-        외부 조인 ( left, outer ) 이 불가능하다 -> inner 조인만 가능 
+        외부 조인 ( left, outer ) 이 불가능하다 -> inner 조인만 가능
      */
     @Test
     @DisplayName("연관관계 없어도 Join이 가능")
