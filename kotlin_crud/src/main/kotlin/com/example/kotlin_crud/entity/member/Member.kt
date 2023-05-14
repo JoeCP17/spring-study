@@ -10,7 +10,6 @@ class Member(
         var password: String? = null
 ) : BaseEntity() {
 
-
     fun update(name: String, password: String) {
         this.name = name
         this.password = password
