@@ -38,6 +38,7 @@ subprojects {
 		implementation("org.springframework.boot:spring-boot-starter-web")
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		developmentOnly("org.springframework.boot:spring-boot-devtools")
+		implementation("org.springframework.boot:spring-boot-starter-validation") // kafka 에서 필요
 
 		//kotlin
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -79,6 +80,22 @@ subprojects {
 	configurations {
 		compileOnly {
 			extendsFrom(configurations.annotationProcessor.get())
+		}
+	}
+
+	project(":schedule") {
+		val jar: Jar by tasks
+		val bootJar: BootJar by tasks
+
+		bootJar.enabled = false
+		jar.enabled = true
+
+		dependencies {
+			implementation("org.springframework.kafka:spring-kafka")
+			testImplementation("org.springframework.kafka:spring-kafka-test")
+
+			implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
+			implementation("org.slf4j:slf4j-api:1.7.30")
 		}
 	}
 }
