@@ -21,9 +21,7 @@ allprojects {
 }
 
 subprojects {
-
 	apply(plugin = "java")
-
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
@@ -82,20 +80,37 @@ subprojects {
 			extendsFrom(configurations.annotationProcessor.get())
 		}
 	}
+}
 
-	project(":schedule") {
-		val jar: Jar by tasks
-		val bootJar: BootJar by tasks
+project(":schedule") {
+	dependencies {
+		implementation(project(":schedule-data"))
+		implementation("org.springframework.kafka:spring-kafka")
+		implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
+		implementation("org.slf4j:slf4j-api:1.7.30")
 
-		bootJar.enabled = false
-		jar.enabled = true
-
-		dependencies {
-			implementation("org.springframework.kafka:spring-kafka")
-			testImplementation("org.springframework.kafka:spring-kafka-test")
-
-			implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
-			implementation("org.slf4j:slf4j-api:1.7.30")
-		}
+		testImplementation("org.springframework.kafka:spring-kafka-test")
 	}
+}
+
+project(":schedule-data") {
+	dependencies {
+		implementation ("org.springframework.boot:spring-boot-starter-webflux")
+	}
+}
+
+project(":schedule") {
+	val jar: Jar by tasks
+	val bootJar: BootJar by tasks
+
+	bootJar.enabled = false
+	jar.enabled = true
+}
+
+project(":schedule-data") {
+	val jar: Jar by tasks
+	val bootJar: BootJar by tasks
+
+	bootJar.enabled = false
+	jar.enabled = true
 }
