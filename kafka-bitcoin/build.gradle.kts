@@ -84,7 +84,6 @@ subprojects {
 
 project(":schedule") {
 	dependencies {
-		implementation(project(":schedule-data"))
 		implementation("org.springframework.kafka:spring-kafka")
 		implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
 		implementation("org.slf4j:slf4j-api:1.7.30")
@@ -95,7 +94,11 @@ project(":schedule") {
 
 project(":schedule-data") {
 	dependencies {
+		implementation("org.slf4j:slf4j-api:1.7.30")
 		implementation ("org.springframework.boot:spring-boot-starter-webflux")
+		implementation("org.springframework.kafka:spring-kafka")
+		testImplementation("org.springframework.kafka:spring-kafka-test")
+
 	}
 }
 
