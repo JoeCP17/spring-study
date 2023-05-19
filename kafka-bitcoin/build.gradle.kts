@@ -95,10 +95,12 @@ project(":schedule") {
 project(":schedule-data") {
 	dependencies {
 		implementation("org.slf4j:slf4j-api:1.7.30")
+		// websocket
+		implementation ("org.springframework.boot:spring-boot-starter-websocket")
+
 		implementation ("org.springframework.boot:spring-boot-starter-webflux")
 		implementation("org.springframework.kafka:spring-kafka")
 		testImplementation("org.springframework.kafka:spring-kafka-test")
-
 	}
 }
 

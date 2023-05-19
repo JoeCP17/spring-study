@@ -41,7 +41,7 @@ services:
     container_name: zookeeper
     image: wurstmeister/zookeeper:latest
     ports:
-      - 2181:2181
+      - "2181:2181"
     networks:
       - kafka-net
 
@@ -51,9 +51,13 @@ services:
       depends_on:
         - zookeeper
       ports:
-        - 9094:9094
+        - "9094:9094"
       environment:
+        # 카프카 접속 가능한 URL 설정
         KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://localhost:9094
+
+        # 카프카 서버의 내부 리스너, 0.0.0.0으로 설정해야 카프카 서버 내부 인스턴스 통신 가능
+        # 0.0.0.0은 카프카 서버의 모든 인터페이스에서 수신이 가능하다.
         KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://0.0.0.0:9094
         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
         KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
@@ -78,7 +82,7 @@ services:
               properties:
                 bootstrap.servers: kafka:9092
     ports:
-      - 8083:8080
+      - "8083:8080"
     networks:
         - kafka-net
 
