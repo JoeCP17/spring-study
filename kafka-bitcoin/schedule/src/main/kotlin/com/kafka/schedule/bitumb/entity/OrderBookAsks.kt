@@ -16,7 +16,6 @@ class OrderBookAsks(
     val createdDate: LocalDateTime,
     val updatedDate: LocalDateTime
 ) {
-
     companion object {
         fun toEntity(quantity: String, price: String, overBook: OverBook): OrderBookAsks {
             return OrderBookAsks(

@@ -1,6 +1,8 @@
 package com.kafka.schedule.bitumb.entity
 
 import com.kafka.schedule.bitumb.service.dto.BitumbOrderbookResponseDTO
+import lombok.AccessLevel
+import lombok.NoArgsConstructor
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

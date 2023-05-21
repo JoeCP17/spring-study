@@ -1,5 +1,6 @@
 package com.kafka.schedule.bitumb.service.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.kafka.schedule.bitumb.entity.OrderBookAsks
 import com.kafka.schedule.bitumb.entity.OverBook
 import java.time.LocalDateTime
@@ -10,8 +11,10 @@ data class BitumbOrderbookResponseDTO(
 ) {
     data class BithumbOrderbookDataDTO(
         val timestamp: String,
-        val payment_currency: String, // 주문통화 ( 코인 )
-        val order_currency: String, // 결제 통화 ( 마켓 )
+        @JsonProperty("payment_currency")
+        val paymentCurrency: String, // 주문통화 ( 코인 )
+        @JsonProperty("order_currency")
+        val orderCurrency: String, // 결제 통화 ( 마켓 )
         val bids: List<BithumbOrderbookBidsDTO>, // 매수 요청 내역
         val asks: List<BithumbOrderbookAsksDTO> // 매도 요청 내역
     ) {
