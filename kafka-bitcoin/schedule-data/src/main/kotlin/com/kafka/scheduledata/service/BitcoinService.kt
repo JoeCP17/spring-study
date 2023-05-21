@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Slf4j
 @Service
-@Transactional(readOnly = true, rollbackFor = [Exception::class])
+@Transactional(readOnly = true)
 class BitcoinService(
     val kafkaTemplate: KafkaTemplate<String, String>,
     val bitcoinSymbolRepository: BitcoinSymbolRepository
