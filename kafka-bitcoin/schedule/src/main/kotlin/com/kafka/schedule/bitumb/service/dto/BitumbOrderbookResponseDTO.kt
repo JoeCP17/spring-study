@@ -41,15 +41,4 @@ data class BitumbOrderbookResponseDTO(
             }
         }
     }
-
-    companion object {
-
-        fun getBids(data: BithumbOrderbookDataDTO.BithumbOrderbookBidsDTO): BithumbOrderbookDataDTO.BithumbOrderbookBidsDTO {
-            return data
-        }
-
-        fun getAsks(data: BithumbOrderbookDataDTO.BithumbOrderbookAsksDTO, index: Int): BithumbOrderbookDataDTO.BithumbOrderbookAsksDTO {
-            return data
-        }
-    }
 }

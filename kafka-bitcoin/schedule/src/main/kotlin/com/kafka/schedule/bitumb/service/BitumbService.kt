@@ -4,7 +4,6 @@ import com.kafka.schedule.bitumb.entity.*
 import com.kafka.schedule.bitumb.service.dto.BitumbOrderbookResponseDTO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.util.ObjectUtils
 
 @Service
 @Transactional(readOnly = true)
@@ -16,7 +15,7 @@ class BitumbService(
 
     @Transactional
     fun saveOrderBookData(response: BitumbOrderbookResponseDTO) {
-        val findOrderBook = findOrderBookByOrderCurrency(response.data.order_currency)
+        val findOrderBook = findOrderBookByOrderCurrency(response.data.orderCurrency)
 
         findOrderBook?.run {
             saveOrderBookAsks(response, this)

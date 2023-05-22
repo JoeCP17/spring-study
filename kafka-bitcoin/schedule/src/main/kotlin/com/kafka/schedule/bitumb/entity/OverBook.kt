@@ -1,8 +1,7 @@
 package com.kafka.schedule.bitumb.entity
 
 import com.kafka.schedule.bitumb.service.dto.BitumbOrderbookResponseDTO
-import lombok.AccessLevel
-import lombok.NoArgsConstructor
+
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -10,7 +9,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class OverBook (
+data class OverBook (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -25,8 +24,8 @@ class OverBook (
         fun toEntity(responseDTO: BitumbOrderbookResponseDTO): OverBook {
             return OverBook(
                 timestamp = responseDTO.data.timestamp,
-                paymentCurrency = responseDTO.data.payment_currency,
-                orderCurrency = responseDTO.data.order_currency,
+                paymentCurrency = responseDTO.data.paymentCurrency,
+                orderCurrency = responseDTO.data.orderCurrency,
                 createdDate = LocalDateTime.now(),
                 updatedDate = LocalDateTime.now()
             )
