@@ -1,7 +1,7 @@
 package com.kafka.scheduledata.service.scheduled
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.kafka.scheduledata.service.constant.TopicType
-import com.kafka.scheduledata.service.factory.DataOfbyteSerializer
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional
 @Component
 class Bitcoinscheduler(
     val bitcoinReader: BitcoinReader,
-    val dataOfbyteSerializer: DataOfbyteSerializer,
-    val kafkaTemplate: KafkaTemplate<String, String>
+    val kafkaTemplate: KafkaTemplate<String, String>,
+    val objectMapper: ObjectMapper
     ) {
 
     /**
@@ -28,8 +28,11 @@ class Bitcoinscheduler(
             bitcoinReader.getBitcoinSymbolDataBySavedSymbolList()
 
         // 전달받은 데이터를 기반으로 직렬화를 거쳐 topic 발송을 요청한다.
-        bitcoinSymbolDataBySavedSymbolList.forEach() {
-            kafkaTemplate.send(TopicType.BITUMB.topicName, dataOfbyteSerializer.serialize(it))
+        bitcoinSymbolDataBySavedSymbolList.forEach {response ->
+            kafkaTemplate.send(TopicType.BITUMB.topicName, objectMapper.serialize(response))
         }
     }
+
+    fun <T> ObjectMapper.serialize(data: T): String = writeValueAsString(data)
+
 }

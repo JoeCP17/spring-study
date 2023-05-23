@@ -1,5 +1,6 @@
 package com.kafka.schedule.bitumb.service
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.kafka.schedule.bitumb.entity.*
 import com.kafka.schedule.bitumb.service.dto.BitumbOrderbookResponseDTO
 import org.springframework.stereotype.Service
@@ -10,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 class BitumbService(
     val orderBookAsksRepository: OrderBookAsksRepository,
     val orderBookBidsRepository: OrderBookBidsRepository,
-    val overBookRepository: OverBookRepository
+    val overBookRepository: OverBookRepository,
+    val objectMapper: ObjectMapper
 ) {
 
     @Transactional
@@ -50,21 +52,21 @@ class BitumbService(
         }
     }
 
-    private fun toOverBookEntityBy(response: BitumbOrderbookResponseDTO): OverBook {
-        return OverBook.toEntity(response)
-    }
+    private fun toOverBookEntityBy(response: BitumbOrderbookResponseDTO): OverBook =
+        OverBook.toEntity(response)
 
-    private fun toAsksEntityBy(quantity: String, price: String, overBook: OverBook): OrderBookAsks {
-        return OrderBookAsks.toEntity(quantity, price, overBook)
-    }
 
-    private fun toBidsEntityBy(quantity: String, price: String, overBook: OverBook): OrderBookBids {
-        return OrderBookBids.toEntity(quantity, price, overBook)
-    }
+    private fun toAsksEntityBy(quantity: String, price: String, overBook: OverBook): OrderBookAsks =
+        OrderBookAsks.toEntity(quantity, price, overBook)
+
+
+    private fun toBidsEntityBy(quantity: String, price: String, overBook: OverBook): OrderBookBids =
+        OrderBookBids.toEntity(quantity, price, overBook)
+
 
 
     // 값이 없을 경우 save 처리를 하기 위해 ?로 설정
-    private fun findOrderBookByOrderCurrency(name: String): OverBook? {
-        return overBookRepository.findByOrderCurrency(name)
-    }
+    private fun findOrderBookByOrderCurrency(name: String): OverBook? =
+        overBookRepository.findByOrderCurrency(name)
+
 }

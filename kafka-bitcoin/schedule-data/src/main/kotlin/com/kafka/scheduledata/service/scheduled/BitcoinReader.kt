@@ -14,14 +14,10 @@ class BitcoinReader(
     val bitumbFetcher: BitumbFetcher,
     val bitcoinSymbolRepository: BitcoinSymbolRepository
 ) {
-    fun getBitcoinSymbolDataBySavedSymbolList(): List<BitumbOrderbookResponseDTO> {
-        getAllBitcoinSymbol().stream().map { bitcoinSymbol ->
-            getBitumbOrderbookData(bitcoinSymbol.symbol)
-
-        }.toList().let { bitumbOrderbookResponseDTOList ->
-            return bitumbOrderbookResponseDTOList
-        }
-    }
+    fun getBitcoinSymbolDataBySavedSymbolList(): List<BitumbOrderbookResponseDTO> =
+        getAllBitcoinSymbol().stream()
+            .map { bitcoinSymbol -> getBitumbOrderbookData(bitcoinSymbol.symbol) }
+            .toList()
 
     fun getBitcoinSymbolBySymbolName(symbol: String): BitcoinSymbol {
         return bitcoinSymbolRepository.findBySymbol(symbol)

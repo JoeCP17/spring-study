@@ -24,8 +24,8 @@ class BitcoinService(
 
     @Transactional
     fun addCoinSymbol(symbol: AddCoinsymbolRequest): AddCoinSymbolResponse {
-         BitcoinSymbol.of(symbol).let { bitcoinSymbol ->
-            return AddCoinSymbolResponse.of( saveBitcoinSymbol(bitcoinSymbol))
+         return BitcoinSymbol.of(symbol).let { bitcoinSymbol ->
+             AddCoinSymbolResponse.of( saveBitcoinSymbol(bitcoinSymbol))
         }
     }
 
