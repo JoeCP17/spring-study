@@ -14,17 +14,25 @@ class CafeKiosk(
         val beverageList: MutableList<Beverage> = mutableListOf()
 ) {
 
-    fun add(beverage: Beverage) {
+    fun add(beverage: Beverage) =
         beverageList.add(beverage)
+
+    fun add(beverage: Beverage, count: Int) {
+        if(count <= 0) {
+            throw IllegalArgumentException("음료 개수는 1개 이상이어야 합니다.")
+        }
+
+        for(i in 1..count) {
+            beverageList.add(beverage)
+        }
     }
 
-    fun remove(beverage: Beverage) {
+    fun remove(beverage: Beverage) =
         beverageList.remove(beverage)
-    }
 
-    fun clear() {
+
+    fun clear() =
         beverageList.clear()
-    }
 
     fun calculateTotalPrice() : Int {
         var totalPrice = 0
@@ -35,8 +43,8 @@ class CafeKiosk(
         return totalPrice
     }
 
-    fun createOrder(): Order {
-        return Order(LocalDateTime.now(), beverageList)
-    }
+    fun createOrder(): Order =
+         Order(LocalDateTime.now(), beverageList)
+
 
 }
