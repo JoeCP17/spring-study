@@ -2,9 +2,11 @@ package com.sample.practical_testing.unit
 
 import com.sample.practical_testing.unit.beverage.Americano
 import com.sample.practical_testing.unit.beverage.Latte
+import com.sample.practical_testing.unit.order.Order
+import java.time.LocalDateTime
 
 
-fun main(args: Array<String>) {
+fun main() {
     run(CafeKiosk())
 }
 
@@ -18,4 +20,8 @@ private fun run(cafeKiosk: CafeKiosk) {
 
     val totalPrice =cafeKiosk.calculateTotalPrice()
     println(">>> 총 가격은 $totalPrice 입니다.")
+
+
+    val order: Order = cafeKiosk.createOrder(LocalDateTime.now())
+    println(">>> 주문 시간은 ${order.orderDateTime} 입니다.")
 }
