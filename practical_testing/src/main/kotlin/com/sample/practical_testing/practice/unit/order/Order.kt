@@ -1,6 +1,6 @@
-package com.sample.practical_testing.unit.order
+package com.sample.practical_testing.practice.unit.order
 
-import com.sample.practical_testing.unit.beverage.Beverage
+import com.sample.practical_testing.practice.unit.beverage.Beverage
 import java.time.LocalDateTime
 
 data class Order(

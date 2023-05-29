@@ -1,8 +1,8 @@
-package com.sample.practical_testing.unit
+package com.sample.practical_testing.practice.unit
 
-import com.sample.practical_testing.unit.beverage.Americano
-import com.sample.practical_testing.unit.beverage.Latte
-import com.sample.practical_testing.unit.order.Order
+import com.sample.practical_testing.practice.unit.beverage.Americano
+import com.sample.practical_testing.practice.unit.beverage.Latte
+import com.sample.practical_testing.practice.unit.order.Order
 import java.time.LocalDateTime
 
 

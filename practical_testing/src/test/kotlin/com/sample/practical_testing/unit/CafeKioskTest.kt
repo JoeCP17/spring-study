@@ -1,7 +1,8 @@
 package com.sample.practical_testing.unit
 
-import com.sample.practical_testing.unit.beverage.Americano
-import com.sample.practical_testing.unit.beverage.Latte
+import com.sample.practical_testing.practice.unit.CafeKiosk
+import com.sample.practical_testing.practice.unit.beverage.Americano
+import com.sample.practical_testing.practice.unit.beverage.Latte
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Assertions.assertEquals

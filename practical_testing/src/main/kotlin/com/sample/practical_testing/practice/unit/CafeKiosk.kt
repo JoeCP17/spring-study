@@ -1,7 +1,7 @@
-package com.sample.practical_testing.unit
+package com.sample.practical_testing.practice.unit
 
-import com.sample.practical_testing.unit.beverage.Beverage
-import com.sample.practical_testing.unit.order.Order
+import com.sample.practical_testing.practice.unit.beverage.Beverage
+import com.sample.practical_testing.practice.unit.order.Order
 import java.time.LocalDateTime
 import java.time.LocalTime
 
@@ -12,9 +12,9 @@ import java.time.LocalTime
  */
 
 class CafeKiosk(
-        val beverageList: MutableList<Beverage> = mutableListOf(),
-        private val SHOP_OPEN_TIME: LocalTime = LocalTime.of(10, 0),
-        private val SHOP_CLOSE_TIME: LocalTime = LocalTime.of(22, 0),
+    val beverageList: MutableList<Beverage> = mutableListOf(),
+    private val SHOP_OPEN_TIME: LocalTime = LocalTime.of(10, 0),
+    private val SHOP_CLOSE_TIME: LocalTime = LocalTime.of(22, 0),
 ) {
 
     fun add(beverage: Beverage) =

@@ -1,4 +1,4 @@
-package com.sample.practical_testing.unit.beverage
+package com.sample.practical_testing.practice.unit.beverage
 
 class Americano : Beverage {
 
