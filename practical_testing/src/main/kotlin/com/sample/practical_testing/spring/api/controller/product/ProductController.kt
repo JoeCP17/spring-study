@@ -1,5 +1,7 @@
-package com.sample.practical_testing.spring.api
+package com.sample.practical_testing.spring.api.controller.product
 
+import com.sample.practical_testing.spring.api.service.product.response.ProductResponse
+import com.sample.practical_testing.spring.api.service.product.ProductService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
