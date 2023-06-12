@@ -4,7 +4,7 @@ package com.kafka.scheduledata.service.constant
 enum class TopicType(
     var topicName: String
 ) {
-    BITUMB("bitumb"),
+    BITHUMB("bithumb"),
     COINONE("coinone"),
     UPBIT("upbit")
 }
