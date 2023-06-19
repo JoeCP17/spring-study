@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest // Spring boot Test는 Transactional이 설정되어있지 않아 roll back이 발생하지 않는다.
+@Transactional
 internal class OrderServiceTest @Autowired constructor(
     private val orderService: OrderService,
     private val productRepository: ProductRepository,
@@ -26,12 +28,12 @@ internal class OrderServiceTest @Autowired constructor(
     private val orderProductRepository: OrderProductRepository
 ) {
 
-    @AfterEach
-    fun tearDown() {
-        productRepository.deleteAllInBatch()
-        orderRepository.deleteAllInBatch()
-        orderProductRepository.deleteAllInBatch()
-    }
+//    @AfterEach
+//    fun tearDown() {
+//        productRepository.deleteAllInBatch()
+//        orderRepository.deleteAllInBatch()
+//        orderProductRepository.deleteAllInBatch()
+//    }
 
     @Test
     @DisplayName("주문번호 리스트를 받아 주문을 생성한다.")
