@@ -6,6 +6,8 @@ import com.sample.practical_testing.spring.domain.order.Order
 import com.sample.practical_testing.spring.domain.order.OrderRepository
 import com.sample.practical_testing.spring.domain.product.Product
 import com.sample.practical_testing.spring.domain.product.ProductRepository
+import com.sample.practical_testing.spring.domain.product.ProductType
+import com.sample.practical_testing.spring.domain.stock.StockRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -14,7 +16,8 @@ import java.util.stream.Collectors
 @Service
 class OrderService(
     val productRepository: ProductRepository,
-    val orderRepository: OrderRepository
+    val orderRepository: OrderRepository,
+    val stockRepository: StockRepository
 ) {
 
     @Transactional
@@ -23,6 +26,37 @@ class OrderService(
 
         // Product
         val products = findProductsBy(productNumbers) ?: throw IllegalArgumentException("Product not found")
+
+        // 재고 차감 체크가 필요한 상품들 filter
+        val stockProductNumber = products.stream()
+            .filter { product -> ProductType.containStockType(product?.type!!) }
+            .map { product -> product?.productNumber }
+            .collect(Collectors.toList())
+        // 재고 Entity 조회
+        val stocks = stockRepository.findAllByProductNumberIn(productNumbers)
+        val stockMap = stocks.stream()
+            .collect(Collectors.toMap({ stock -> stock.productNumber }, { stock -> stock }))
+
+        // 상품별 제고 체크
+        val productCountingMap = stockProductNumber.stream()
+            .collect(
+                Collectors.groupingBy(
+                    { productNumber -> productNumber },
+                    Collectors.counting()
+                )
+            )
+        // 재고 차감 시도
+        stockProductNumber.forEach { productNumber ->
+            val stock = stockMap[productNumber]
+            val quantity = productCountingMap[productNumber]?.toInt()
+
+            if (stock!!.isQuantityLessThan(quantity!!)) {
+                throw IllegalArgumentException("Stock is not enough")
+            }
+
+            stock.decreaseQuantity(quantity)
+
+        }
 
         // Order
         val order = Order.create(products as List<Product>, registeredDateTime)
