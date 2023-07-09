@@ -13,6 +13,8 @@ data class OrderBookBids(
     @ManyToOne(targetEntity = OverBook::class, fetch = FetchType.LAZY)
     @JoinColumn(name = "over_book_id")
     val overBookId: OverBook,
+    @Version
+    var version: Long = 1,
     val createdDate: LocalDateTime,
     val updatedDate: LocalDateTime
 ) {

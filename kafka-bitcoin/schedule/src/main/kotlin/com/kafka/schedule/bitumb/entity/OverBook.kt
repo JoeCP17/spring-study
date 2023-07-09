@@ -3,10 +3,7 @@ package com.kafka.schedule.bitumb.entity
 import com.kafka.schedule.bitumb.service.dto.BitumbOrderbookResponseDTO
 
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class OverBook (
@@ -16,6 +13,8 @@ data class OverBook (
     val timestamp: String,
     val paymentCurrency: String,
     val orderCurrency: String,
+    @Version
+    var version: Long = 1,
     val createdDate: LocalDateTime,
     val updatedDate: LocalDateTime
     ){

@@ -19,15 +19,15 @@ class BitcoinReader(
             .map { bitcoinSymbol -> getBitumbOrderbookData(bitcoinSymbol.symbol) }
             .toList()
 
-    fun getBitcoinSymbolBySymbolName(symbol: String): BitcoinSymbol {
+    private fun getBitcoinSymbolBySymbolName(symbol: String): BitcoinSymbol {
         return bitcoinSymbolRepository.findBySymbol(symbol)
     }
 
-    fun getAllBitcoinSymbol(): List<BitcoinSymbol> {
+    private fun getAllBitcoinSymbol(): List<BitcoinSymbol> {
         return bitcoinSymbolRepository.findAll()
     }
 
-    fun getBitumbOrderbookData(code: String): BitumbOrderbookResponseDTO {
+    private fun getBitumbOrderbookData(code: String): BitumbOrderbookResponseDTO {
         return bithumbFetcher.getBitumbOrderbook(code)
     }
 }
