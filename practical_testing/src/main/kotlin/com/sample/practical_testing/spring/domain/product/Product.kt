@@ -8,6 +8,7 @@ data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
+
     val productNumber: String,
 
     @Enumerated(EnumType.STRING)

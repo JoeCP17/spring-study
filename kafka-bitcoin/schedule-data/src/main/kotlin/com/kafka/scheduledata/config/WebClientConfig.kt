@@ -11,6 +11,9 @@ import org.springframework.web.reactive.function.client.WebClient
 @Configuration
 class WebClientConfig {
 
+    /**
+     * @description: bithumb 호가정보 조회
+     */
     @Bean(name = ["bitumbWebClient"])
     fun bitumbWebClient(): WebClient {
         return WebClient.builder()
